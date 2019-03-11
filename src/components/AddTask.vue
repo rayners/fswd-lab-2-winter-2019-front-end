@@ -6,8 +6,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
     name: 'AddTask',
     data() {
@@ -18,12 +16,9 @@ export default {
 
     methods: {
         addTask() {
-            // console.log(`Adding ${this.newTask}`);
-            axios.post('/tasks', { task: this.newTask })
-                .then(response => {
-                    this.$emit('new-task', response.data);
-                    this.newTask = '';
-                });
+            this.$store.commit('addTask', this.newTask);
+            this.newTask = '';
+            this.$router.push('/');
         }
     }
 }

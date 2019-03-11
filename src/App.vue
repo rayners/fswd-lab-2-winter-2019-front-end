@@ -9,13 +9,18 @@
     <button v-on:click="loadtasks">Load tasks</button>
 
     <AddTask v-on:new-task="addedtask"></AddTask> -->
+
+    <p>There are currently {{ numberOfTasks }} tasks.</p>
   </div>
 </template>
 
 <script>
 import TaskList from './components/TaskList.vue';
 import AddTask from './components/AddTask.vue';
-import axios from 'axios';
+
+import { mapGetters } from 'vuex';
+
+import tasks from './tasks';
 
 export default {
   name: 'app',
@@ -25,21 +30,12 @@ export default {
     AddTask
   },
 
-  methods: {
-    addedtask(newTask) {
-      this.tasks.push(newTask);
-    },
-    loadtasks() {
-      axios.get('/tasks')
-        .then(response => {
-          this.tasks = response.data;
-        })
-    }
-  },
+  computed: mapGetters(['numberOfTasks']),
 
   mounted() {
-    this.loadtasks();
+    this.$store.dispatch('loadtasks');
   }
+
 }
 </script>
 

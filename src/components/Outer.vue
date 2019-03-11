@@ -5,28 +5,14 @@
 <script>
 import axios from 'axios';
 import TaskList from './TaskList.vue';
+import { mapState } from 'vuex';
+
+import tasks from '../tasks';
 
 export default {
-    components: { TaskList },
-  data() {
-    return {
-      tasks: []
-    };
-  },
-  methods: {
-    addedtask(newTask) {
-      this.tasks.push(newTask);
-    },
-    loadtasks() {
-      axios.get('/tasks')
-        .then(response => {
-          this.tasks = response.data;
-        })
-    }
-  },
-  mounted() {
-    this.loadtasks();
-  }
+  components: { TaskList },
+
+  computed: mapState(['tasks'])
 }
 </script>
 
