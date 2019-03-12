@@ -2,18 +2,18 @@
 <div>
     <p>List of tasks</p>
     <ul>
-        <li v-for="task in tasks"><router-link v-bind:to="'/tasks/' + task.id">{{task.name}}</router-link></li>
+        <li v-for="task in tasks" v-bind:key="task.id"><router-link v-bind:to="'/tasks/' + task.id">{{task.name}}</router-link></li>
     </ul>
     <p>There are {{ numberOfTasks }} tasks.</p>
 
     <p>List of incomplete tasks</p>
     <ul>
-        <li v-for="task in incompleteTasks"><router-link v-bind:to="'/tasks/' + task.id">{{ task.name }}</router-link></li>
+        <li v-for="task in incompleteTasks" v-bind:key="task.id"><router-link v-bind:to="'/tasks/' + task.id">{{ task.name }}</router-link></li>
     </ul>
 
     <p>List of completed tasks</p>
     <ul>
-        <li v-for="task in completedTasks"><router-link v-bind:to="'/tasks/' + task.id">{{ task.name }}</router-link></li>
+        <li v-for="task in completedTasks" v-bind:key="task.id"><router-link v-bind:to="'/tasks/' + task.id">{{ task.name }}</router-link></li>
     </ul>
 </div>
 </template>

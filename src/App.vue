@@ -2,6 +2,7 @@
   <div id="app">
     <router-link to="/">Tasks</router-link>
     <router-link to="/add">Add a task</router-link>
+    <router-link to="/register">Register</router-link>
     <router-view></router-view>
     <!-- <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->

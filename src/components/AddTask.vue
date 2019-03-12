@@ -16,7 +16,7 @@ export default {
 
     methods: {
         addTask() {
-            this.$store.commit('addTask', this.newTask);
+            this.$store.dispatch('addtask', this.newTask);
             this.newTask = '';
             this.$router.push('/');
         }
