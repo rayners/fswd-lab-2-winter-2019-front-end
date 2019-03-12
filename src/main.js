@@ -11,7 +11,8 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    tasks: []
+    tasks: [],
+    user: {}
   },
   mutations: {
     addTask(state, payload) {
@@ -20,17 +21,6 @@ const store = new Vuex.Store({
     addTasks(state, payload) {
       state.tasks.push(...payload);
     }
-    // addPendingTask(state, payload) {
-    //   state.tasks.push({ name: payload, id: 'pending', _isPending: true })
-    // },
-    // commitPendingTask(state, payload) {
-    //   for(var i = 0; i < state.tasks.length; i++) {
-    //     if (state.tasks[i]._isPending) {
-    //       state.tasks[i] = payload;
-    //       break;
-    //     }
-    //   }
-    // }
   },
   getters: {
     numberOfTasks: state => state.tasks.length
@@ -47,6 +37,12 @@ const store = new Vuex.Store({
         .then(response => {
           store.commit('addTask', response.data);
         });
+    },
+    register(store, payload) {
+      axios.post('/users/register', payload)
+        .then(response => {
+          store.commit('setCurrentUser', response.data)
+        });        
     }
   }
 });

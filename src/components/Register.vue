@@ -59,8 +59,12 @@ export default {
             if (this.cannotRegister) {
                 this.errors = ['Naughty'];
             } else {
-                this.isUsernameAvailable();
-                // ...
+                this.$store.dispatch('register', {
+                    username: this.username,
+                    password: this.password,
+                    password_confirm: this.password_confirm
+                })
+                    .then(() => this.$router.push('/'));
             }
         },
         isUsernameAvailable() {
