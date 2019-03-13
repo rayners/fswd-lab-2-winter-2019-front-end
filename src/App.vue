@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <section class="section">
-      <div class="container content">
+      <div class="container">
         <div class="tabs is-centered">
           <ul>
             <router-link to="/tasks" tag="li" active-class="is-active">
@@ -10,8 +10,11 @@
             <router-link to="/add" tag="li" active-class="is-active">
               <a>Add a task</a>
             </router-link>
-            <router-link to="/register" tag="li" active-class="is-active">
+            <router-link v-if="!isLoggedIn" to="/register" tag="li" active-class="is-active">
               <a>Register</a>
+            </router-link>
+            <router-link v-if="!isLoggedIn" to="/login" tag="li" active-class="is-active">
+              <a>Login</a>
             </router-link>
           </ul>
         </div>
@@ -38,10 +41,11 @@ export default {
     AddTask
   },
 
-  computed: mapGetters(['numberOfTasks']),
+  computed: mapGetters(['numberOfTasks', 'isLoggedIn']),
 
   mounted() {
     this.$store.dispatch('loadtasks');
+    this.$store.dispatch('loadcurrentuser');
   }
 
 }

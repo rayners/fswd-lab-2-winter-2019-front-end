@@ -1,39 +1,35 @@
 <template>
-<div>
-    <p>List of tasks</p>
+<div class="content">
+    <p>List of {{ title }} tasks</p>
     <ul>
         <li v-for="task in tasks" v-bind:key="task.id"><router-link v-bind:to="'/tasks/' + task.id">{{task.name}}</router-link></li>
     </ul>
-    <p>There are {{ numberOfTasks }} tasks.</p>
-
-    <p>List of incomplete tasks</p>
-    <ul>
-        <li v-for="task in incompleteTasks" v-bind:key="task.id"><router-link v-bind:to="'/tasks/' + task.id">{{ task.name }}</router-link></li>
-    </ul>
-
-    <p>List of completed tasks</p>
-    <ul>
-        <li v-for="task in completedTasks" v-bind:key="task.id"><router-link v-bind:to="'/tasks/' + task.id">{{ task.name }}</router-link></li>
-    </ul>
+    <p>There are {{ numberOfTasks }} {{ title }} tasks.</p>
 </div>
 </template>
 
 <script>
 export default {
     name: 'TaskList',
-    props: ['tasks'],
+    // props: ['tasks', 'title'],
+    props: ['list'],
 
     computed: {
+        title() {
+            return this.list;
+        },
+        tasks() {
+          if (this.list === 'overall') {
+            return this.$store.state.tasks;
+          } else if (this.list === 'incomplete') {
+            return this.$store.getters.incompleteTasks;
+          } else {
+            return this.$store.getters.completedTasks;
+          }
+        },
         numberOfTasks() {
             return this.tasks ? this.tasks.length : 0;
-        },
-        incompleteTasks() {
-            return this.tasks ? this.tasks.filter(task => !task.completedAt) : [];
-        },
-        completedTasks() {
-            return this.tasks ? this.tasks.filter(task => task.completedAt) : [];
         }
-
     }
 };
 </script>
