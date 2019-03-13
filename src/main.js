@@ -52,11 +52,14 @@ import AddTask from './components/AddTask.vue';
 import Task from './components/Task.vue';
 import Register from './components/Register.vue';
 
+require('./assets/sass/main.scss');
+
 Vue.config.productionTip = false
 
 const router = new VueRouter({
   routes: [
-    { path: '/', component: Outer },
+    { path: '/', redirect: '/tasks' },
+    { path: '/tasks', component: Outer },
     { path: '/add', component: AddTask },
     { path: '/tasks/:id', component: Task },
     { path: '/register', component: Register }

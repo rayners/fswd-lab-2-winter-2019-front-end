@@ -1,17 +1,24 @@
 <template>
   <div id="app">
-    <router-link to="/">Tasks</router-link>
-    <router-link to="/add">Add a task</router-link>
-    <router-link to="/register">Register</router-link>
-    <router-view></router-view>
-    <!-- <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <!-- <TaskList v-bind:tasks="tasks"></TaskList>
-    <button v-on:click="loadtasks">Load tasks</button>
-
-    <AddTask v-on:new-task="addedtask"></AddTask> -->
-
-    <p>There are currently {{ numberOfTasks }} tasks.</p>
+    <section class="section">
+      <div class="container content">
+        <div class="tabs is-centered">
+          <ul>
+            <router-link to="/tasks" tag="li" active-class="is-active">
+              <a>Tasks</a>
+            </router-link>
+            <router-link to="/add" tag="li" active-class="is-active">
+              <a>Add a task</a>
+            </router-link>
+            <router-link to="/register" tag="li" active-class="is-active">
+              <a>Register</a>
+            </router-link>
+          </ul>
+        </div>
+        <router-view></router-view>
+        <p>There are currently {{ numberOfTasks }} tasks.</p>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -39,14 +46,3 @@ export default {
 
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
