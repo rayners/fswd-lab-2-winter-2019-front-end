@@ -15,26 +15,9 @@
 
 <script>
 import axios from 'axios';
-import TaskList from './TaskList.vue';
-import { mapState } from 'vuex';
 
 export default {
-  components: { TaskList },
-
-  data() {
-    return {
-      list: 'overall'
-    };
-  },
-
-  computed: {
-  },
-
-  methods: {
-    setList(list) {
-      this.list = list;
-    }
-  }
+  name: 'Outer'
 }
 </script>
 

@@ -44,7 +44,7 @@ const store = new Vuex.Store({
           });
       },
       addtask(store, payload) {
-        axios.post('/tasks', { task: payload })
+        return axios.post('/tasks', { task: payload })
           .then(response => {
             store.commit('addTask', response.data);
           });

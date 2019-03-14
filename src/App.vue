@@ -7,7 +7,7 @@
             <router-link to="/tasks" tag="li" active-class="is-active">
               <a>Tasks</a>
             </router-link>
-            <router-link to="/add" tag="li" active-class="is-active">
+            <router-link v-if="isLoggedIn" to="/add" tag="li" active-class="is-active">
               <a>Add a task</a>
             </router-link>
             <router-link v-if="!isLoggedIn" to="/register" tag="li" active-class="is-active">
