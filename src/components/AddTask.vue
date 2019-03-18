@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import store from '../store';
+
 export default {
     name: 'AddTask',
     data() {
@@ -31,15 +33,18 @@ export default {
         }
     },
 
-    beforeRouteEnter(to, from, next) {
-        // next(vm => {
-        //     if (vm.$store.getters.isLoggedIn) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-        // });
-        next();
+    // beforeRouteEnter(to, from, next) {
+    //     if (store.state.user) {
+    //         next();
+    //     } else {
+    //         next('/tasks/incomplete');
+    //     }
+    // },
+
+    beforeRouteLeave(to, from, next) {
+        if (!this.newTask || confirm('You still have a task to add! Leave the page?')) {
+            next();
+        }
     }
 }
 </script>

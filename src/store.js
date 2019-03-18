@@ -7,7 +7,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
       tasks: [],
-      user: null
+      user: null,
+      currentTask: null
     },
     mutations: {
       addTask(state, payload) {
@@ -21,6 +22,10 @@ const store = new Vuex.Store({
       },
       setUser(state, user) {
         state.user = user;
+      },
+      updateTask(state, payload) {
+        const taskIndex = state.tasks.findIndex(task => task.id === payload.id);
+        Vue.set(state.tasks, taskIndex, payload);
       }
     },
     getters: {
@@ -52,14 +57,24 @@ const store = new Vuex.Store({
       register(store, payload) {
         axios.post('/users/register', payload)
           .then(response => {
-            store.commit('setCurrentUser', response.data)
+            store.commit('setUser', response.data)
           });        
       },
       login(store, payload) {
           return axios.post('/users/login', payload)
             .then(response => {
-                store.commit('setCurrentUser', response.data);
+                store.commit('setUser', response.data);
             });
+      },
+      completetask(store, payload) {
+        return axios.post(`/tasks/${payload.id}/complete`)
+          .then(response => {
+            store.commit('updateTask', response.data);
+          })
+      },
+      loadtask(store, payload) {
+        return axios.get(`/tasks/${payload}`)
+          .then(response => store.commit('setCurrentTask', response.data));
       }
     }
   });

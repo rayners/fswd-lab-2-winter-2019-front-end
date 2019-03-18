@@ -28,11 +28,24 @@ const router = new VueRouter({
         { path: 'incomplete', component: TaskList, props: { list: 'incomplete' }}
       ]
     },
-    { path: '/add', component: AddTask },
+    { path: '/add', component: AddTask, meta: { requireAuth: true } },
     { path: '/tasks/:id', component: Task },
     { path: '/register', component: Register },
     { path: '/login', component: Login }
   ]
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    if (store.state.user) {
+      next();
+    } else {
+      next(false);
+    }
+
+  } else {
+    next();
+  }
 });
 
 new Vue({
